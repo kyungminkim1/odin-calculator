@@ -40,6 +40,8 @@ function operate(operator, number1, number2) {
             result = divide(number1, number2);
             break;
         // else print error message
+        default:
+            result = 'You should not be getting this message';
     }   
     // return result
     return result;
