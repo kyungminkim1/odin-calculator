@@ -8,8 +8,9 @@ function subtract(a, b) {
     return a - b;
 }
 
-function multiply() {
+function multiply(a, b) {
     // return result of a * b
+    return a * b;
 }
 
 function divide() {
