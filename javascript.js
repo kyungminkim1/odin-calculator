@@ -46,3 +46,11 @@ function operate(operator, number1, number2) {
     // return result
     return result;
 }
+
+// get display node
+
+// get digit buttons
+// for each button:
+    // add event listener on click
+    // callback function will display matching digit
+
