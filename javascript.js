@@ -48,9 +48,15 @@ function operate(operator, number1, number2) {
 }
 
 // get display node
+const display = document.querySelector('.display');
 
 // get digit buttons
+const digitBtns = document.querySelectorAll('.digit');
+const digitBtnsArr = [...digitBtns];
 // for each button:
     // add event listener on click
+digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
     // callback function will display matching digit
+    display.textContent += e.target.textContent;
+}));
 
