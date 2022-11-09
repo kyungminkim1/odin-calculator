@@ -60,3 +60,14 @@ digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
     display.textContent += e.target.textContent;
 }));
 
+// create currentNum variable
+// create currentOp variable
+
+// get operation buttons
+// for each button:
+    // check operation type by symbol
+    // add event listener on click
+    // callback function will:
+        // save current value in display
+        // save operation symbol
+
