@@ -93,9 +93,11 @@ function initialise() {
         // clear currentOp
     equalBtn.addEventListener('click', function(e){
         const secondNum = display.textContent.split(currentOp)[1];
-        const result = operate(currentOp, parseInt(currentNum), parseInt(secondNum));
+        const result = operate(currentOp, parseFloat(currentNum), parseFloat(secondNum));
         display.textContent = result;
         currentNum = result;
         currentOp = null;
     })
 }
+
+initialise();
