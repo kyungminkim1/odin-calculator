@@ -19,6 +19,8 @@ function divide(a, b) {
 }
 
 function operate(operator, number1, number2) {
+    // check if parameters are valid
+        // if false, return 'error'
     // create result variable
     let result;
     // check operator using switch statement
@@ -79,3 +81,11 @@ opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
     currentNum = display.textContent;
     display.textContent += currentOp;
 }));
+
+// get equal button
+// add event listener on click
+// callback function will:
+    // call operate()
+    // display result from operate()
+    // update currentNum
+    // clear currentOp
