@@ -62,30 +62,40 @@ digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
     display.textContent += e.target.textContent;
 }));
 
-// create currentNum variable
-let currentNum;
-// create currentOp variable
-let currentOp;
+function initialise() {
+    // create currentNum variable
+    let currentNum;
+    // create currentOp variable
+    let currentOp;
 
-// get operation buttons
-const opBtns = document.querySelectorAll('.operation');
-const opBtnsArr = [...opBtns];
-// for each button:
-// add event listener on click
-// callback function will:
-    // save current value in display
-    // save operation symbol
-    // display operator
-opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
-    currentOp = e.target.textContent;
-    currentNum = display.textContent;
-    display.textContent += currentOp;
-}));
+    // get operation buttons
+    const opBtns = document.querySelectorAll('.operation');
+    const opBtnsArr = [...opBtns];
+    // for each button:
+    // add event listener on click
+    // callback function will:
+        // save current value in display
+        // save operation symbol
+        // display operator
+    opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
+        currentOp = e.target.textContent;
+        currentNum = display.textContent;
+        display.textContent += currentOp;
+    }));
 
-// get equal button
-// add event listener on click
-// callback function will:
-    // call operate()
-    // display result from operate()
-    // update currentNum
-    // clear currentOp
+    // get equal button
+    const equalBtn = document.querySelector('#btn-equal');
+    // add event listener on click
+    // callback function will:
+        // call operate()
+        // display result from operate()
+        // update currentNum
+        // clear currentOp
+    equalBtn.addEventListener('click', function(e){
+        const secondNum = display.textContent.split(currentOp)[1];
+        const result = operate(currentOp, parseInt(currentNum), parseInt(secondNum));
+        display.textContent = result;
+        currentNum = result;
+        currentOp = null;
+    })
+}
