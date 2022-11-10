@@ -61,13 +61,21 @@ digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
 }));
 
 // create currentNum variable
+let currentNum;
 // create currentOp variable
+let currentOp;
 
 // get operation buttons
+const opBtns = document.querySelectorAll('.operation');
+const opBtnsArr = [...opBtns];
 // for each button:
-    // check operation type by symbol
-    // add event listener on click
-    // callback function will:
-        // save current value in display
-        // save operation symbol
-
+// add event listener on click
+// callback function will:
+    // save current value in display
+    // save operation symbol
+    // display operator
+opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
+    currentOp = e.target.textContent;
+    currentNum = display.textContent;
+    display.textContent += currentOp;
+}));
