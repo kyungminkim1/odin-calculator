@@ -98,6 +98,14 @@ function initialise() {
         currentNum = result;
         currentOp = null;
     })
+
+    // get clear button
+    // add event listener
+    // callback function will:
+        // set display to '' i.e. empty string
+        // set currentNum to 0
+        // set currentOp to null
+
 }
 
 initialise();
