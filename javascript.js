@@ -58,8 +58,20 @@ const digitBtnsArr = [...digitBtns];
 // for each button:
     // add event listener on click
 digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
-    // callback function will display matching digit
-    display.textContent += e.target.textContent;
+    // get digit from button
+    const clickedDigit = e.target.textContent;
+    // check if current display = 0
+    if (display.textContent == 0) {
+        if (clickedDigit != 0)
+        // check if digit clicked isn't 0
+            // replace 0 with new digit
+            display.textContent = clickedDigit;
+    }
+    
+    // else append digit to display
+    else {
+        display.textContent += clickedDigit;
+    }
 }));
 
 function initialise() {
@@ -100,11 +112,17 @@ function initialise() {
     })
 
     // get clear button
+    const clearBtn = document.querySelector('#btn-clear');
     // add event listener
     // callback function will:
         // set display to '' i.e. empty string
         // set currentNum to 0
         // set currentOp to null
+    clearBtn.addEventListener('click', function() {
+        display.textContent = '';
+        currentNum = 0;
+        currentOp = null;
+    })
 
 }
 
