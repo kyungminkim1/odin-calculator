@@ -49,36 +49,11 @@ function operate(operator, number1, number2) {
     return result;
 }
 
-// get display node
-const display = document.querySelector('.display');
-
-// get digit buttons
-const digitBtns = document.querySelectorAll('.digit');
-const digitBtnsArr = [...digitBtns];
-// for each button:
-    // add event listener on click
-digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
-    // get digit from button
-    const clickedDigit = e.target.textContent;
-    // check if current display = 0
-    if (display.textContent == 0) {
-        if (clickedDigit != 0)
-        // check if digit clicked isn't 0
-            // replace 0 with new digit
-            display.textContent = clickedDigit;
-    }
-    
-    // else append digit to display
-    else {
-        display.textContent += clickedDigit;
-    }
-}));
-
 function initialise() {
     // create currentNum variable
-    let currentNum;
+    let currentNum = 0;
     // create currentOp variable
-    let currentOp;
+    let currentOp = null;
 
     // get operation buttons
     const opBtns = document.querySelectorAll('.operation');
@@ -107,9 +82,9 @@ function initialise() {
         const secondNum = display.textContent.split(currentOp)[1];
         const result = operate(currentOp, parseFloat(currentNum), parseFloat(secondNum));
         display.textContent = result;
-        currentNum = result;
+        currentNum = 0;
         currentOp = null;
-    })
+    });
 
     // get clear button
     const clearBtn = document.querySelector('#btn-clear');
@@ -122,7 +97,32 @@ function initialise() {
         display.textContent = '';
         currentNum = 0;
         currentOp = null;
-    })
+    });
+
+    // get display node
+    const display = document.querySelector('.display');
+
+    // get digit buttons
+    const digitBtns = document.querySelectorAll('.digit');
+    const digitBtnsArr = [...digitBtns];
+    // for each button:
+        // add event listener on click
+    digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
+        // get digit from button
+        const clickedDigit = e.target.textContent;
+        // check if current display = 0
+        if (currentNum == 0) {
+            if (clickedDigit != 0)
+            // check if digit clicked isn't 0
+                // replace 0 with new digit
+                display.textContent = clickedDigit;
+        }
+        
+        // else append digit to display
+        else {
+            display.textContent += clickedDigit;
+        }
+    }));
 
 }
 
