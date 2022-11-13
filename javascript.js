@@ -51,53 +51,9 @@ function operate(operator, number1, number2) {
 
 function initialise() {
     // create currentNum variable
-    let currentNum = 0;
+    let currentNum = null;
     // create currentOp variable
     let currentOp = null;
-
-    // get operation buttons
-    const opBtns = document.querySelectorAll('.operation');
-    const opBtnsArr = [...opBtns];
-    // for each button:
-    // add event listener on click
-    // callback function will:
-        // save current value in display
-        // save operation symbol
-        // display operator
-    opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
-        currentOp = e.target.textContent;
-        currentNum = display.textContent;
-        display.textContent += currentOp;
-    }));
-
-    // get equal button
-    const equalBtn = document.querySelector('#btn-equal');
-    // add event listener on click
-    // callback function will:
-        // call operate()
-        // display result from operate()
-        // update currentNum
-        // clear currentOp
-    equalBtn.addEventListener('click', function(e){
-        const secondNum = display.textContent.split(currentOp)[1];
-        const result = operate(currentOp, parseFloat(currentNum), parseFloat(secondNum));
-        display.textContent = result;
-        currentNum = 0;
-        currentOp = null;
-    });
-
-    // get clear button
-    const clearBtn = document.querySelector('#btn-clear');
-    // add event listener
-    // callback function will:
-        // set display to '' i.e. empty string
-        // set currentNum to 0
-        // set currentOp to null
-    clearBtn.addEventListener('click', function() {
-        display.textContent = '';
-        currentNum = 0;
-        currentOp = null;
-    });
 
     // get display node
     const display = document.querySelector('.display');
@@ -110,12 +66,25 @@ function initialise() {
     digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
         // get digit from button
         const clickedDigit = e.target.textContent;
-        // check if current display = 0
-        if (currentNum == 0) {
-            if (clickedDigit != 0)
+        // check if currentNum is null
+        if (currentNum == null) {
             // check if digit clicked isn't 0
+            if (clickedDigit != 0)
                 // replace 0 with new digit
                 display.textContent = clickedDigit;
+        }
+
+        // else check if currentOp is not null
+        else if (currentOp != null && currentNum != null) {
+            // check if display isn't 0
+            if (clickedDigit != 0 && display.textContent != clickedDigit) {
+                // write over existing display with new digit
+                display.textContent = clickedDigit;
+            }
+            // else append digit to display
+            else {
+                display.textContent += clickedDigit;
+            }
         }
         
         // else append digit to display
@@ -123,6 +92,49 @@ function initialise() {
             display.textContent += clickedDigit;
         }
     }));
+
+    // get operation buttons
+    const opBtns = document.querySelectorAll('.operation');
+    const opBtnsArr = [...opBtns];
+    // for each button:
+    // add event listener on click
+    // callback function will:
+        // save current value in display
+        // save operation symbol
+    opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
+        currentOp = e.target.textContent;
+        currentNum = display.textContent;
+    }));
+
+    // get equal button
+    const equalBtn = document.querySelector('#btn-equal');
+    // add event listener on click
+    // callback function will:
+        // get current value from display (secondNum)
+        // call operate()
+        // display result from operate()
+        // update currentNum
+        // clear currentOp
+    equalBtn.addEventListener('click', function(e){
+        const secondNum = display.textContent;
+        const result = operate(currentOp, parseFloat(currentNum), parseFloat(secondNum));
+        display.textContent = result;
+        currentNum = 0;
+        currentOp = null;
+    });
+
+    // get clear button
+    const clearBtn = document.querySelector('#btn-clear');
+    // add event listener
+    // callback function will:
+        // set display to 0
+        // set currentNum to null
+        // set currentOp to null
+    clearBtn.addEventListener('click', function() {
+        display.textContent = 0;
+        currentNum = null;
+        currentOp = null;
+    });
 
 }
 
