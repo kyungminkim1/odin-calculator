@@ -54,6 +54,8 @@ function initialise() {
     let currentNum = null;
     // create currentOp variable
     let currentOp = null;
+    // create startSecondNum variable
+    let startSecondNum = false;
 
     // get display node
     const display = document.querySelector('.display');
@@ -66,31 +68,42 @@ function initialise() {
     digitBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
         // get digit from button
         const clickedDigit = e.target.textContent;
-        // check if currentNum is null
-        if (currentNum == null) {
-            // check if digit clicked isn't 0
-            if (clickedDigit != 0)
-                // replace 0 with new digit
-                display.textContent = clickedDigit;
+        // check if display is 0 and clicked digit is 0
+        if (display.textContent == 0 && clickedDigit == 0){
+            // empty return
+            return;
         }
 
-        // else check if currentOp is not null
-        else if (currentOp != null && currentNum != null) {
-            // check if display isn't 0
-            if (clickedDigit != 0 && display.textContent != clickedDigit) {
-                // write over existing display with new digit
+        // else check if display is 0 and clicked digit isn't 0
+        else if (display.textContent == 0 && clickedDigit != 0) {
+            // replace 0 with digit
+            display.textContent = clickedDigit;
+        }
+
+        // else check if currentNum is null i.e. get first operand
+        else if (currentNum == null) {
+            // append digit to display
+            display.textContent += clickedDigit;
+
+        }
+
+        // else
+        else {
+
+            // check if startSecondNum is true
+            if (startSecondNum == true) {
+                // rewrite display with clicked digit
                 display.textContent = clickedDigit;
+                // set startSecondNum to false
+                startSecondNum = false;
             }
+
             // else append digit to display
             else {
                 display.textContent += clickedDigit;
             }
         }
         
-        // else append digit to display
-        else {
-            display.textContent += clickedDigit;
-        }
     }));
 
     // get operation buttons
@@ -101,9 +114,11 @@ function initialise() {
     // callback function will:
         // save current value in display
         // save operation symbol
+        // set startSecondNum to true
     opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
         currentOp = e.target.textContent;
         currentNum = display.textContent;
+        startSecondNum = true;
     }));
 
     // get equal button
@@ -119,7 +134,7 @@ function initialise() {
         const secondNum = display.textContent;
         const result = operate(currentOp, parseFloat(currentNum), parseFloat(secondNum));
         display.textContent = result;
-        currentNum = 0;
+        currentNum = null;
         currentOp = null;
     });
 
