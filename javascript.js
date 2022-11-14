@@ -19,8 +19,6 @@ function divide(a, b) {
 }
 
 function operate(operator, number1, number2) {
-    // check if parameters are valid
-        // if false, return 'error'
     // create result variable
     let result;
     // check operator using switch statement
@@ -54,8 +52,8 @@ function initialise() {
     let currentNum = null;
     // create currentOp variable
     let currentOp = null;
-    // create startSecondNum variable
-    let startSecondNum = false;
+    // create startNewNum variable
+    let startNewNum = false;
 
     // get display node
     const display = document.querySelector('.display');
@@ -80,30 +78,18 @@ function initialise() {
             display.textContent = clickedDigit;
         }
 
-        // else check if currentNum is null i.e. get first operand
-        else if (currentNum == null) {
-            // append digit to display
-            display.textContent += clickedDigit;
-
+        // else check if startNewNum is true
+        else if (startNewNum == true) {
+            // rewrite display with clicked digit
+            display.textContent = clickedDigit;
+            // set startNewNum to false
+            startNewNum = false;
         }
 
-        // else
+        // else append digit to display
         else {
-
-            // check if startSecondNum is true
-            if (startSecondNum == true) {
-                // rewrite display with clicked digit
-                display.textContent = clickedDigit;
-                // set startSecondNum to false
-                startSecondNum = false;
-            }
-
-            // else append digit to display
-            else {
-                display.textContent += clickedDigit;
-            }
+            display.textContent += clickedDigit;
         }
-        
     }));
 
     // get operation buttons
@@ -114,11 +100,11 @@ function initialise() {
     // callback function will:
         // save current value in display
         // save operation symbol
-        // set startSecondNum to true
+        // set startNewNum to true
     opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
         currentOp = e.target.textContent;
         currentNum = display.textContent;
-        startSecondNum = true;
+        startNewNum = true;
     }));
 
     // get equal button
@@ -130,12 +116,14 @@ function initialise() {
         // display result from operate()
         // update currentNum
         // clear currentOp
+        // set startNewNum to true
     equalBtn.addEventListener('click', function(e){
         const secondNum = display.textContent;
         const result = operate(currentOp, parseFloat(currentNum), parseFloat(secondNum));
         display.textContent = result;
         currentNum = null;
         currentOp = null;
+        startNewNum = true;
     });
 
     // get clear button
