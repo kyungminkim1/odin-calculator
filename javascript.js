@@ -97,14 +97,27 @@ function initialise() {
     const opBtnsArr = [...opBtns];
     // for each button:
     // add event listener on click
-    // callback function will:
-        // save current value in display
-        // save operation symbol
-        // set startNewNum to true
+    // callback function will perform the following:
     opBtnsArr.forEach(btn => btn.addEventListener('click', function(e) {
-        currentOp = e.target.textContent;
-        currentNum = display.textContent;
+        // start a new number
         startNewNum = true;
+        // check if currentOp and currentNum is not null
+        if (currentOp != null && currentNum != null) {
+            // get second number
+            const secondNum = display.textContent;
+            // calculate new currentNum using operate()
+            currentNum = operate(currentOp, parseFloat(currentNum), parseFloat(secondNum));
+            display.textContent = currentNum;
+            
+        }
+        // else save current value in display
+        else {
+            currentNum = display.textContent;
+        }
+        // save operator symbol
+        currentOp = e.target.textContent;
+            
+
     }));
 
     // get equal button
