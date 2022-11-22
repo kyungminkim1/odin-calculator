@@ -86,6 +86,12 @@ function initialise() {
             startNewNum = false;
         }
 
+        // else check if digit limit has been reached
+        else if (display.textContent.length >= 10) {
+            // empty return
+            return;
+        }
+
         // else append digit to display
         else {
             display.textContent += clickedDigit;
@@ -132,11 +138,31 @@ function initialise() {
         // set startNewNum to true
     equalBtn.addEventListener('click', function(e){
         const secondNum = display.textContent;
-        const result = operate(currentOp, parseFloat(currentNum), parseFloat(secondNum));
-        display.textContent = result;
-        currentNum = null;
-        currentOp = null;
-        startNewNum = true;
+        // check if currentNum isn't null
+        if (currentNum != null) {
+            let result = parseFloat(operate(currentOp, parseFloat(currentNum), parseFloat(secondNum)));
+            // check if result is larger than 10 digits\
+            /* 
+            if (result.toString().length > 10) {
+                const currentLen = result.toString().length;
+                result = result.toPrecision(10);
+                const newLen = currentLen - result.toString().length;
+                result = result / (10 ** 9);
+                const sigValue = 9 + newLen;
+                result = result.toString() + 'e' + sigValue;
+            }
+            */
+            // else check if result isn't whole number
+            if (!Number.isInteger(result)) {
+                // round to 9 decimal points max 
+                result = Math.round(result * (10 ** 9)) / (10 ** 9);
+            }
+            display.textContent = result;
+            currentNum = null;
+            currentOp = null;
+            startNewNum = true;
+        }
+        
     });
 
     // get clear button
