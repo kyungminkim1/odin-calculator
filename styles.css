@@ -1,22 +1,39 @@
+body {
+    font-family: Tahoma, Verdana, sans-serif;
+}
+
 .container {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 
-    width: 500px;
-    height: 700px;
+    width: 400px;
+    height: 500px;
     border: 1px solid black;
     background-color: #06D6A0;
+    padding: 20px;
 }
 
 .display {
     background-color: #FCFCFC;
+    padding: 5px;
+
+    font-size: 64px;
+    text-align: right;
 }
 
 button {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 80px;
 
     background-color: #FFD166;
+
+    font-size: 36px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
 }
 
 .operation, #btn-equal {
