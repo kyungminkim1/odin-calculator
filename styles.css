@@ -25,15 +25,18 @@ body {
 button {
     width: 90px;
     height: 80px;
+    border-radius: 10px;
 
     background-color: #FFD166;
 
     font-size: 36px;
+    gap: 5px;
 }
 
 .button-row {
     display: flex;
     justify-content: space-between;
+    margin: 1px 0;
 }
 
 .operation, #btn-equal {
