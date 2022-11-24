@@ -81,8 +81,8 @@ function initialise() {
             display.textContent = clickedDigit;
         }
 
-        // else check if startNewNum is true
-        else if (startNewNum == true) {
+        // else check if startNewNum is true and decimal point isn't used
+        else if (startNewNum == true && display.textContent.slice(-1) !== '.') {
             // rewrite display with clicked digit
             display.textContent = clickedDigit;
             // set startNewNum to false
