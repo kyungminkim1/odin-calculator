@@ -1,6 +1,6 @@
 function add(a, b) {
     // return result of a + b
-    return a + b;
+    return parseFloat(a) + parseFloat(b);
 }
 
 function subtract(a, b) {
@@ -15,6 +15,9 @@ function multiply(a, b) {
 
 function divide(a, b) {
     // return result of a / b
+    if (b == 0) {
+        return `Don't`;
+    }
     return a / b;
 }
 
@@ -140,23 +143,32 @@ function initialise() {
         const secondNum = display.textContent;
         // check if currentNum isn't null
         if (currentNum != null) {
-            let result = parseFloat(operate(currentOp, parseFloat(currentNum), parseFloat(secondNum)));
+            let result = operate(currentOp, currentNum, secondNum);
+            if (typeof result === 'number') {
+                // check if result is larger than 10 digits\
+                if (result.toString().length > 10) {
+                    const currentLen = result.toString().length;
+                    result = result.toPrecision(5);
+                }
 
-            // check if result is larger than 10 digits\
-            if (result.toString().length > 10) {
-                const currentLen = result.toString().length;
-                result = result.toPrecision(6);
+                // else check if result isn't whole number
+                else if (!Number.isInteger(result)) {
+                    // round to 9 decimal points max 
+                    result = Math.round(result * (10 ** 9)) / (10 ** 9);
+                }
+                display.textContent = result;
+                currentNum = null;
+                currentOp = null;
+                startNewNum = true;
             }
 
-            // else check if result isn't whole number
-            else if (!Number.isInteger(result)) {
-                // round to 9 decimal points max 
-                result = Math.round(result * (10 ** 9)) / (10 ** 9);
+            else {
+                display.textContent = result;
+                currentNum = null;
+                currentOp = null;
+                startNewNum = true;
             }
-            display.textContent = result;
-            currentNum = null;
-            currentOp = null;
-            startNewNum = true;
+            
         }
         
     });
