@@ -43,7 +43,7 @@ button {
     background-color: #38a2ff;
 }
 
-#btn-clear {
+#btn-clear, #btn-backspace {
     background-color: #EF476F;
 }
 
