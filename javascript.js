@@ -186,6 +186,23 @@ function initialise() {
         currentOp = null;
     });
 
+    // get backspace button
+    // add event listener
+    // callback will:
+        // check if displayed digit is single digit
+            // set display to 0
+        // else remove last digit input
+    const backspaceBtn = document.querySelector('#btn-backspace');
+    backspaceBtn.addEventListener('click', function() {
+        if (display.textContent.length === 1) {
+            display.textContent = 0;
+        }
+        else {
+            const len = display.textContent.length;
+            display.textContent = display.textContent.substring(0, len - 1);
+        }
+    });
+
 }
 
 initialise();
