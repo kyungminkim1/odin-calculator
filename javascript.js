@@ -203,6 +203,12 @@ function initialise() {
         }
     });
 
+    // get decimal point button
+    // add event listener
+    // callback function will:
+        // check if decimal point isn't used in display
+        // append decimal point to display
+
 }
 
 initialise();
