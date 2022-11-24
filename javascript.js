@@ -70,13 +70,13 @@ function initialise() {
         // get digit from button
         const clickedDigit = e.target.textContent;
         // check if display is 0 and clicked digit is 0
-        if (display.textContent == 0 && clickedDigit == 0){
+        if (display.textContent === '0' && clickedDigit == 0){
             // empty return
             return;
         }
 
         // else check if display is 0 and clicked digit isn't 0
-        else if (display.textContent == 0 && clickedDigit != 0) {
+        else if (display.textContent === '0' && clickedDigit != 0) {
             // replace 0 with digit
             display.textContent = clickedDigit;
         }
@@ -207,7 +207,14 @@ function initialise() {
     // add event listener
     // callback function will:
         // check if decimal point isn't used in display
-        // append decimal point to display
+            // append decimal point to display
+    const pointBtn = document.querySelector('#btn-point');
+    pointBtn.addEventListener('click', function() {
+        const pointIndex = display.textContent.indexOf('.');
+        if (pointIndex === -1) {
+            display.textContent += '.';
+        }
+    });
 
 }
 
