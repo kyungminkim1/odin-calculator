@@ -216,6 +216,9 @@ function initialise() {
         }
     });
 
+    // add event listeners to keyboard
+    window.addEventListener('keydown', e => console.log(e.key));
+
 }
 
 initialise();
