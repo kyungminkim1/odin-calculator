@@ -105,7 +105,7 @@ function saveOperator(e) {
     currentOp = e.target.textContent;
 }
 
-function calculate(e) {
+function calculateOperation() {
     const secondNum = display.textContent;
     // check if currentNum isn't null
     if (currentNum != null) {
@@ -138,13 +138,13 @@ function calculate(e) {
     }
 }
 
-function clearCalc(e) {
+function clearCalc() {
     display.textContent = 0;
     currentNum = null;
     currentOp = null;
 }
 
-function deleteLastChar(e) {
+function deleteLastChar() {
     if (display.textContent.length === 1) {
         display.textContent = 0;
     }
@@ -154,11 +154,22 @@ function deleteLastChar(e) {
     }
 }
 
-function addDecimalPoint(e) {
+function addDecimalPoint() {
     const pointIndex = display.textContent.indexOf('.');
     if (pointIndex === -1) {
         display.textContent += '.';
     }
+}
+
+function checkKey(e) {
+    // get key from event
+    // check which char it is against button symbols e.g. digits, operators, equal
+        // if digit, call addDigitToDisplay(e)
+        // if operator, call saveOperator(e)
+        // if equal, call calculateOperation
+        // if escape, call clearCalc
+        // if backspace, call deleteLastChar
+        // if '.', call addDecimalPoint
 }
 
 // create currentNum variable
@@ -196,7 +207,7 @@ function initialise() {
         // update currentNum
         // clear currentOp
         // set startNewNum to true
-    equalBtn.addEventListener('click', calculate);
+    equalBtn.addEventListener('click', calculateOperation);
 
     // get clear button
     const clearBtn = document.querySelector('#btn-clear');
@@ -225,7 +236,7 @@ function initialise() {
     pointBtn.addEventListener('click', addDecimalPoint);
 
     // add event listeners to keyboard
-    window.addEventListener('keydown', e => console.log(e.key));
+    window.addEventListener('keydown', checkKey);
 
 }
 
