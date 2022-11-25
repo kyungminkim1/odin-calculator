@@ -34,12 +34,12 @@ function operate(operator, number1, number2) {
         case '-':
             result = subtract(number1, number2);
             break;
-        // if 'x', call multiply(number1, number2)
-        case 'x':
+        // if '*', call multiply(number1, number2)
+        case '*':
             result = multiply(number1, number2);
             break;
-        // if '÷', call divide(number1, number2)
-        case '÷':
+        // if '/', call divide(number1, number2)
+        case '/':
             result = divide(number1, number2);
             break;
         // else print error message
