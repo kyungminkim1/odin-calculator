@@ -83,7 +83,7 @@ function addDigitToDisplay(digit) {
     }
 }
 
-function saveOperator(e) {
+function saveOperator(op) {
     // start a new number
     startNewNum = true;
     // check if currentOp and currentNum is not null
@@ -100,7 +100,7 @@ function saveOperator(e) {
         currentNum = display.textContent;
     }
     // save operator symbol
-    currentOp = e.target.textContent;
+    currentOp = op;
 }
 
 function calculateOperation() {
@@ -162,22 +162,45 @@ function addDecimalPoint() {
 function checkKey(e) {
     // get key from event
     const key = e.key;
-    console.log(e.key)
     // check which char it is against button symbols e.g. digits, operators, equal
     // if digit, call addDigitToDisplay(e)
-    if (typeof parseInt(key) === 'number' && !Object.is(NaN, parseInt(key))) addDigitToDisplay(key);
+    if (typeof parseInt(key) === 'number' && !Object.is(NaN, parseInt(key))) {
+        addDigitToDisplay(key);
+    }
     // if operator, call saveOperator(e)
+    else if (key === '+' || key === '-' || key === '*' || key === '/') {
+        saveOperator(key);
+    }
     // if equal, call calculateOperation
+    else if (key === '=' || key === 'Enter') {
+        calculateOperation();
+    }
     // if escape, call clearCalc
+    else if (key === 'Escape') {
+        clearCalc();
+    }
     // if backspace, call deleteLastChar
+    else if (key === 'Backspace') {
+        deleteLastChar();
+    }
     // if '.', call addDecimalPoint
+    else if (key === '.') {
+        addDecimalPoint();
+    }
 }
 
 function checkDigit(e) {
     // get digit from event
     const digit = e.target.textContent;
     // call addDigitToDisplay
-    addDigitToDisplay(e);
+    addDigitToDisplay(digit);
+}
+
+function checkOp(e) {
+    // get digit from event
+    const op = e.target.textContent;
+    // call addDigitToDisplay
+    saveOperator(op);
 }
 
 // create currentNum variable
@@ -195,7 +218,7 @@ function initialise() {
     const digitBtnsArr = [...digitBtns];
     // for each button:
         // add event listener on click
-    digitBtnsArr.forEach(btn => btn.addEventListener('click', e => checkDigit));
+    digitBtnsArr.forEach(btn => btn.addEventListener('click', checkDigit));
 
     // get operation buttons
     const opBtns = document.querySelectorAll('.operation');
@@ -203,7 +226,7 @@ function initialise() {
     // for each button:
     // add event listener on click
     // callback function will perform the following:
-    opBtnsArr.forEach(btn => btn.addEventListener('click', saveOperator));
+    opBtnsArr.forEach(btn => btn.addEventListener('click', checkOp));
 
     // get equal button
     const equalBtn = document.querySelector('#btn-equal');
