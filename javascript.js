@@ -50,25 +50,23 @@ function operate(operator, number1, number2) {
     return result;
 }
 
-function addDigitToDisplay(e) {
-    // get digit from button
-    const clickedDigit = e.target.textContent;
+function addDigitToDisplay(digit) {
     // check if display is 0 and clicked digit is 0
-    if (display.textContent === '0' && clickedDigit == 0){
+    if (display.textContent === '0' && digit == 0){
         // empty return
         return;
     }
 
     // else check if display is 0 and clicked digit isn't 0
-    else if (display.textContent === '0' && clickedDigit != 0) {
+    else if (display.textContent === '0' && digit != 0) {
         // replace 0 with digit
-        display.textContent = clickedDigit;
+        display.textContent = digit;
     }
 
     // else check if startNewNum is true and decimal point isn't used
     else if (startNewNum == true && display.textContent.slice(-1) !== '.') {
         // rewrite display with clicked digit
-        display.textContent = clickedDigit;
+        display.textContent = digit;
         // set startNewNum to false
         startNewNum = false;
     }
@@ -81,7 +79,7 @@ function addDigitToDisplay(e) {
 
     // else append digit to display
     else {
-        display.textContent += clickedDigit;
+        display.textContent += digit;
     }
 }
 
@@ -177,7 +175,9 @@ function checkKey(e) {
 
 function checkDigit(e) {
     // get digit from event
+    const digit = e.target.textContent;
     // call addDigitToDisplay
+    addDigitToDisplay(e);
 }
 
 // create currentNum variable
