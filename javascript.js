@@ -163,13 +163,21 @@ function addDecimalPoint() {
 
 function checkKey(e) {
     // get key from event
+    const key = e.key;
+    console.log(e.key)
     // check which char it is against button symbols e.g. digits, operators, equal
-        // if digit, call addDigitToDisplay(e)
-        // if operator, call saveOperator(e)
-        // if equal, call calculateOperation
-        // if escape, call clearCalc
-        // if backspace, call deleteLastChar
-        // if '.', call addDecimalPoint
+    // if digit, call addDigitToDisplay(e)
+    if (typeof parseInt(key) && parseInt(key) !== NaN) addDigitToDisplay(key);
+    // if operator, call saveOperator(e)
+    // if equal, call calculateOperation
+    // if escape, call clearCalc
+    // if backspace, call deleteLastChar
+    // if '.', call addDecimalPoint
+}
+
+function checkDigit(e) {
+    // get digit from event
+    // call addDigitToDisplay
 }
 
 // create currentNum variable
@@ -187,7 +195,7 @@ function initialise() {
     const digitBtnsArr = [...digitBtns];
     // for each button:
         // add event listener on click
-    digitBtnsArr.forEach(btn => btn.addEventListener('click', addDigitToDisplay));
+    digitBtnsArr.forEach(btn => btn.addEventListener('click', e => checkDigit));
 
     // get operation buttons
     const opBtns = document.querySelectorAll('.operation');
