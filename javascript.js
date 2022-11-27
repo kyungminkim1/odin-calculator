@@ -165,7 +165,7 @@ function checkKey(e) {
     console.log(e.key)
     // check which char it is against button symbols e.g. digits, operators, equal
     // if digit, call addDigitToDisplay(e)
-    if (typeof parseInt(key) && parseInt(key) !== NaN) addDigitToDisplay(key);
+    if (typeof parseInt(key) === 'number' && !Object.is(NaN, parseInt(key))) addDigitToDisplay(key);
     // if operator, call saveOperator(e)
     // if equal, call calculateOperation
     // if escape, call clearCalc
